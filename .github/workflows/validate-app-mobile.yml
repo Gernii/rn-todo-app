@@ -1,0 +1,46 @@
+name: Validate App Mobile
+
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - edited
+    paths:
+      - "apps/mobile/**"
+      - ".github/workflows/validate-app-mobile.yml"
+
+permissions:
+  id-token: write
+  contents: read
+  pull-requests: write
+  checks: write
+
+jobs:
+  All:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup
+        uses: ./.github/actions/setup
+
+      - name: Lint
+        shell: bash
+        run: npm run biome.check --workspace=mobile
+
+      - name: Verify JS Bundling (Export)
+        shell: bash
+        run: npm run export --workspace=mobile
+
+      # ⚡ BƯỚC MỚI DÀNH CHO JEST: Gộp chung Test và Report
+      - name: Test & Report Jest Coverage
+        uses: ArtiomTr/jest-coverage-report-action@v2
+        with:
+          working-directory: apps/mobile # Không cần dấu ./ ở đầu
+          test-script: npm run test.coverage
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      

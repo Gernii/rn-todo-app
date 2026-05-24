@@ -1,0 +1,32 @@
+name: Secrets Detection
+on:
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 21 * * *" # run once a day at 21:00 UTC
+
+    # Add explicit permissions for the workflow
+permissions:
+  contents: read
+  pull-requests: read
+  actions: read
+  security-events: write
+
+jobs:
+  Scan:
+    name: gitleaks
+    runs-on: ubuntu-latest
+    environment: Security Checks
+    # Skip any PR created by dependabot to avoid permission issues:
+    if: (github.actor != 'dependabot[bot]')
+
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITLEAKS_LICENSE: ${{ secrets.GITLEAKS_LICENSE }}
+          GITLEAKS_CONFIG: gitleaks.toml
+          GITLEAKS_VERSION: 8.30.1

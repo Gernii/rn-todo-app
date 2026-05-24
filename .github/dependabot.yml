@@ -1,0 +1,43 @@
+version: 2
+updates:
+  # === NPM Dependencies ===
+  # Groups all npm/yarn updates into a single PR
+  - package-ecosystem: "npm"
+    directory: "/"
+    versioning-strategy: "increase"
+    schedule:
+      interval: "weekly"
+      timezone: "Asia/Saigon"
+      time: "01:00"
+      day: "monday"
+    open-pull-requests-limit: 10
+    # Configuration to ignore unwanted updates
+    ignore:
+      # 1. Ignore all updates for @types/node
+      - dependency-name: "@types/node"
+      # 2. Ignore all updates for @biomejs/biome
+      - dependency-name: "@biomejs/biome"
+      # 3. Ignore all MAJOR updates for ALL packages
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+    # This groups all npm packages into one PR
+    groups:
+      npm-dependencies: # You can rename this group
+        patterns:
+          - "*"
+
+  # === GitHub Actions ===
+  # Groups all GitHub Action updates into a single PR
+  - package-ecosystem: "github-actions"
+    # Use the explicit workflow directory for clarity and maintainability.
+    directory: ".github/workflows"
+    schedule:
+      interval: "weekly"
+      timezone: "Asia/Saigon"
+      time: "01:00"
+      day: "monday"
+    # This groups all GitHub Actions into one PR
+    groups:
+      github-actions: # You can rename this group
+        patterns:
+          - "*"

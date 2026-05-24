@@ -1,0 +1,26 @@
+{
+	"$schema": "https://biomejs.dev/schemas/2.4.15/schema.json",
+	"root": false,
+	"extends": "//",
+
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"recommended": true,
+			"correctness": {
+				"useImportExtensions": "off"
+			},
+			"style": {
+				"useComponentExportOnlyModules": "off"
+			}
+		},
+		"domains": {
+			"project": "all",
+			"react": "all",
+			"reactNative": "all",
+			"test": "all",
+			"tailwind": "all",
+			"types": "all"
+		}
+	}
+}
