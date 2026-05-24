@@ -31,6 +31,10 @@ jobs:
         shell: bash
         run: npm run biome.check --workspace=mobile
 
+      - name: Verify JS Bundling (Export)
+        shell: bash
+        run: npm run export --workspace=mobile
+
       # ⚡ BƯỚC MỚI DÀNH CHO JEST: Gộp chung Test và Report
       - name: Test & Report Jest Coverage
         uses: ArtiomTr/jest-coverage-report-action@v2
@@ -39,6 +43,4 @@ jobs:
           test-script: npm run test.coverage
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Verify JS Bundling (Export)
-        shell: bash
-        run: npm run export
+      
