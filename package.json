@@ -10,7 +10,7 @@
 		"biome.check": "turbo biome.check",
 		"biome.fix": "turbo biome.fix",
 		"commit": "czg",
-		"export": "turbo export --filter=mobile"
+		"export": "turbo export"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "2.4.15",
