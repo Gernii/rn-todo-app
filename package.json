@@ -1,0 +1,34 @@
+{
+	"name": "rn-todo-app",
+	"private": true,
+	"scripts": {
+		"dev": "turbo dev",
+		"test": "turbo test",
+		"test.ci": "turbo test.ci",
+		"setup": "turbo prepare",
+		"prepare": "husky && npm run setup",
+		"biome.check": "turbo biome.check",
+		"biome.fix": "turbo biome.fix",
+		"commit": "czg"
+	},
+	"devDependencies": {
+		"turbo": "^2.9.14",
+		"typescript": "~6.0.3",
+		"@biomejs/biome": "2.4.15",
+		"czg": "^1.13.1",
+		"husky": "^9.1.7",
+		"lint-staged": "^17.0.5",
+		"npm-run-all2": "^9.0.1"
+	},
+	"engines": {
+		"node": ">=24"
+	},
+	"overrides": {
+		"uuid": "^14.0.0"
+	},
+	"packageManager": "npm@11.11.0",
+	"workspaces": [
+		"apps/mobile",
+		"apps/backend"
+	]
+}

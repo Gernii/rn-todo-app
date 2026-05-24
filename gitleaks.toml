@@ -1,0 +1,8 @@
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Allow seed data with test secrets"
+paths = [
+    '''seed\.rs'''
+]
