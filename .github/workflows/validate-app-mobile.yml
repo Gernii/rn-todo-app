@@ -42,4 +42,4 @@ jobs:
       - name: Verify JS Bundling (Export)
         shell: bash
         working-directory: apps/mobile
-        run: npx expo export
+        run: npx --no-install expo export -p android
