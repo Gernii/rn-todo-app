@@ -9,7 +9,8 @@
 		"prepare": "husky && npm run setup",
 		"biome.check": "turbo biome.check",
 		"biome.fix": "turbo biome.fix",
-		"commit": "czg"
+		"commit": "czg",
+		"export": "turbo export --filter=apps/mobile"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "2.4.15",

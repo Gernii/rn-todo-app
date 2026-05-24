@@ -73,7 +73,8 @@
 		"---------FMT AND LINT FIX-----------": "Lint check and fix valid code",
 		"biome.fix": "biome check --write --unsafe .",
 		"---------FMT AND LINT CHECK-----------": "Lint check valid code only",
-		"biome.check": "biome check ."
+		"biome.check": "biome check .",
+		"export": "expo export -p android -p ios"
 	},
 	"private": true,
 	"lint-staged": {
