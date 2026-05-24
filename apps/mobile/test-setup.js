@@ -1,4 +1,8 @@
-import "@testing-library/react-native/extend-expect";
+import "@testing-library/jest-native/extend-expect";
+
+jest.mock("react-native-worklets", () =>
+	require("react-native-worklets/src/mock"),
+);
 
 // 1. Giả lập React Native Reanimated
 require("react-native-reanimated").setUpTests();
