@@ -11,7 +11,7 @@
 	"include": [
 		"**/*.ts",
 		"**/*.tsx",
-		"mobile/.expo/types/**/*.ts",
+		".expo/types/**/*.ts",
 		"expo-env.d.ts",
 		"**/src/global.css",
 		"uniwind-env.d.ts"
