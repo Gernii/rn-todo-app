@@ -36,6 +36,9 @@
 		},
 		"export": {
 			"dependsOn": ["^export"]
+		},
+		"i18n.build": {
+			"dependsOn": ["^i18n.build"]
 		}
 	}
 }
