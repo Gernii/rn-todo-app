@@ -1,36 +1,65 @@
 {
-  "editor.codeActionsOnSave": {
-    "source.organizeImports.biome": "explicit",
-    "source.fixAll.biome": "explicit"
-  },
-  "files.associations": {
-    "*.css": "tailwindcss"
-  },
-  "css.lint.unknownAtRules": "ignore",
-  "editor.formatOnSave": true,
-  "tailwindCSS.classAttributes": ["className", "*ClassName"],
-  "tailwindCSS.classFunctions": ["cva", "cn"],
-  "files.autoSave": "onFocusChange",
-  "[javascript]": {
-    "editor.defaultFormatter": "biomejs.biome"
-  },
-  "[javascriptreact]": {
-    "editor.defaultFormatter": "biomejs.biome"
-  },
-  "[typescript]": {
-    "editor.defaultFormatter": "biomejs.biome"
-  },
-  "[typescriptreact]": {
-    "editor.defaultFormatter": "biomejs.biome"
-  },
-  "[json]": {
-    "editor.defaultFormatter": "biomejs.biome"
-  },
-  "[jsonc]": {
-    "editor.defaultFormatter": "biomejs.biome"
-  },
-  "[css]": {
-    "editor.defaultFormatter": "biomejs.biome"
-  },
-"rust-analyzer.linkedProjects": ["apps/backend/Cargo.toml"]
+	"editor.codeActionsOnSave": {
+		"source.organizeImports.biome": "explicit",
+		"source.fixAll.biome": "explicit"
+	},
+	"files.associations": {
+		"*.css": "tailwindcss"
+	},
+	"css.lint.unknownAtRules": "ignore",
+	"editor.formatOnSave": true,
+	"tailwindCSS.classAttributes": [
+		"class",
+		"className",
+		"headerClassName",
+		"contentContainerClassName",
+		"columnWrapperClassName",
+		"endFillColorClassName",
+		"imageClassName",
+		"tintColorClassName",
+		"ios_backgroundColorClassName",
+		"thumbColorClassName",
+		"trackColorOnClassName",
+		"trackColorOffClassName",
+		"selectionColorClassName",
+		"cursorColorClassName",
+		"underlineColorAndroidClassName",
+		"placeholderTextColorClassName",
+		"selectionHandleColorClassName",
+		"colorsClassName",
+		"progressBackgroundColorClassName",
+		"titleColorClassName",
+		"underlayColorClassName",
+		"colorClassName",
+		"drawerBackgroundColorClassName",
+		"statusBarBackgroundColorClassName",
+		"backdropColorClassName",
+		"backgroundColorClassName",
+		"ListFooterComponentClassName",
+		"ListHeaderComponentClassName"
+	],
+	"tailwindCSS.classFunctions": ["cva", "cn", "useResolveClassNames"],
+	"files.autoSave": "onFocusChange",
+	"[javascript]": {
+		"editor.defaultFormatter": "biomejs.biome"
+	},
+	"[javascriptreact]": {
+		"editor.defaultFormatter": "biomejs.biome"
+	},
+	"[typescript]": {
+		"editor.defaultFormatter": "biomejs.biome"
+	},
+	"[typescriptreact]": {
+		"editor.defaultFormatter": "biomejs.biome"
+	},
+	"[json]": {
+		"editor.defaultFormatter": "biomejs.biome"
+	},
+	"[jsonc]": {
+		"editor.defaultFormatter": "biomejs.biome"
+	},
+	"[css]": {
+		"editor.defaultFormatter": "biomejs.biome"
+	},
+	"rust-analyzer.linkedProjects": ["apps/backend/Cargo.toml"]
 }

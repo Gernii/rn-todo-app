@@ -1,4 +1,11 @@
 {
 	"$schema": "https://inlang.com/schema/inlang-message-format",
-	"example_message": "Hello world {username}"
+	"stock_large_bullock_bake": "Settings",
+	"home_heavy_larva_express": "Select {name}",
+	"free_fit_haddock_mop": "theme",
+	"late_best_lemming_bask": "language",
+	"shy_teal_alligator_sew": "Light",
+	"key_bad_cowfish_greet": "Dark",
+	"tense_yummy_clownfish_exhale": "Vietnamese",
+	"suave_legal_jan_jest": "English"
 }
