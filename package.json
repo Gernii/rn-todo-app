@@ -2,15 +2,16 @@
 	"name": "rn-todo-app",
 	"private": true,
 	"scripts": {
-		"dev": "turbo dev",
-		"test": "turbo test",
-		"test.ci": "turbo test.ci",
-		"setup": "turbo prepare",
+		"dev": "turbo run dev",
+		"test": "turbo run test",
+		"test.ci": "turbo run test.ci",
+		"setup": "turbo run prepare",
+		"i18n.build": "turbo run i18n.build",
 		"prepare": "husky && npm run setup",
-		"biome.check": "turbo biome.check",
-		"biome.fix": "turbo biome.fix",
+		"biome.check": "turbo run biome.check",
+		"biome.fix": "turbo run biome.fix",
 		"commit": "czg",
-		"export": "turbo export"
+		"export": "turbo run export"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "2.4.15",
@@ -19,7 +20,7 @@
 		"husky": "^9.1.7",
 		"lint-staged": "^17.0.5",
 		"npm-run-all2": "^9.0.1",
-		"turbo": "^2.9.14",
+		"turbo": "latest",
 		"typescript": "~6.0.3"
 	},
 	"engines": {

@@ -4,6 +4,7 @@
 	"version": "0.0.1",
 	"dependencies": {
 		"@rn-primitives/portal": "^1.4.0",
+		"@rn-primitives/select": "^1.4.0",
 		"@rn-primitives/slot": "^1.4.0",
 		"@tanstack/react-form": "^1.32.0",
 		"@tanstack/valibot-form-adapter": "^0.42.1",
@@ -64,6 +65,7 @@
 		"i18n.build": "npm run i18n.base -- --output-structure message-modules",
 		"i18n.watch": "npm run i18n.base -- --watch --output-structure locale-modules --emit-readme",
 		"android": "concurrently \"npm run i18n.watch\" \"expo run:android\"",
+		"androida": "expo run:android",
 		"ios": "concurrently \"npm run i18n.watch\" \"expo run:ios\"",
 		"eas-build-pre-install": "npm run i18n.build",
 		"test": "jest",

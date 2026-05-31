@@ -1,4 +1,11 @@
 {
 	"$schema": "https://inlang.com/schema/inlang-message-format",
-	"example_message": "Xin chào {username}"
+	"stock_large_bullock_bake": "Cài đặt",
+	"home_heavy_larva_express": "Chọn {name}",
+	"free_fit_haddock_mop": "chủ đề",
+	"late_best_lemming_bask": "ngôn ngữ",
+	"shy_teal_alligator_sew": "Sáng",
+	"key_bad_cowfish_greet": "Tối",
+	"tense_yummy_clownfish_exhale": "Tiếng Việt",
+	"suave_legal_jan_jest": "Tiếng Anh"
 }
