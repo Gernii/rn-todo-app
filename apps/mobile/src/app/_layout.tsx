@@ -1,5 +1,4 @@
 import "@/global.css";
-import "temporal-polyfill/global";
 
 import { PortalHost } from "@rn-primitives/portal";
 import { DarkTheme, DefaultTheme, Stack, ThemeProvider } from "expo-router";
