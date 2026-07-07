@@ -1,0 +1,130 @@
+name: Build App Mobile (Manual)
+
+# Build App Mobile (Manual)
+#
+# Build Android and iOS WITHOUT EAS — artifacts are built entirely on GitHub runners.
+#
+# Android: ubuntu-latest + Java 17 + Gradle  (free, ~15-25 min)
+# iOS    : macos-latest  + Xcode             (expensive minutes, ~30-50 min)
+#
+# NOTE: This workflow produces UNSIGNED builds (no App Store key / certificate needed).
+#       Signed builds require adding secrets: KEYSTORE_FILE, KEYSTORE_PASSWORD,
+#       KEY_ALIAS, KEY_PASSWORD (Android) and Apple Distribution certificate (iOS).
+
+
+on:
+  push:
+    branches:
+      - main
+      - master
+    paths:
+      - "apps/mobile/**"
+      - ".github/workflows/build-app-mobile-manual.yml"
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+# ─────────────────────────────────────────────
+# ANDROID — Gradle build on ubuntu-latest
+# ─────────────────────────────────────────────
+jobs:
+  build-android:
+    name: Build Android (Gradle)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Setup Java 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: "17"
+          distribution: "temurin"
+
+      - name: Initialize i18n
+        shell: bash
+        run: npm run i18n.build --filter=mobile
+
+      # Gradle reads Node/Expo to bundle JS at build time,
+      # so Node must already be available before this step.
+      - name: Build Android APK (unsigned release)
+        working-directory: apps/mobile/android
+        run: ./gradlew assembleRelease --no-daemon
+
+      - name: Upload Android APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-manual-${{ github.sha }}
+          # Gradle output path for a standard RN/Expo project
+          path: apps/mobile/android/app/build/outputs/apk/release/app-release.apk
+          retention-days: 7
+
+# ─────────────────────────────────────────────
+# iOS — Xcode build on macos-latest
+# ─────────────────────────────────────────────
+  build-ios:
+    name: Build iOS (Xcode)
+    runs-on: macos-latest  # NOTE: costs ~10× more GitHub Actions minutes than ubuntu
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Initialize i18n
+        shell: bash
+        run: npm run i18n.build --filter=mobile
+
+      # Generate the ios/ native folder from Expo config (app.json + plugins).
+      # Skip if ios/ is already committed to the repo.
+      - name: Expo Prebuild (generate ios/)
+        working-directory: apps/mobile
+        run: npx expo prebuild --platform ios --clean --no-install
+
+      - name: Install CocoaPods
+        working-directory: apps/mobile/ios
+        run: pod install
+
+      # Build an unsigned .xcarchive.
+      # For a signed IPA you would add:
+      #   CODE_SIGN_IDENTITY="iPhone Distribution"
+      #   PROVISIONING_PROFILE_SPECIFIER="..."
+      #   and export with ExportOptions.plist
+      - name: Build iOS archive (unsigned)
+        working-directory: apps/mobile
+        run: |
+          xcodebuild \
+            -workspace ios/rntodoapp.xcworkspace \
+            -scheme rntodoapp \
+            -configuration Release \
+            -sdk iphoneos \
+            -archivePath build/app.xcarchive \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO \
+            archive
+
+      - name: Upload iOS archive
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-manual-${{ github.sha }}
+          path: apps/mobile/build/app.xcarchive
+          retention-days: 7

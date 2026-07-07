@@ -1,5 +1,6 @@
 {
 	"$schema": "https://inlang.com/schema/inlang-message-format",
+	"example_message": "Hello world {username}",
 	"stock_large_bullock_bake": "Settings",
 	"home_heavy_larva_express": "Select {name}",
 	"free_fit_haddock_mop": "theme",
@@ -7,5 +8,13 @@
 	"shy_teal_alligator_sew": "Light",
 	"key_bad_cowfish_greet": "Dark",
 	"tense_yummy_clownfish_exhale": "Vietnamese",
-	"suave_legal_jan_jest": "English"
+	"suave_legal_jan_jest": "English",
+	"knotty_sea_jurgen_cuddle": "Create {name}",
+	"new_vexed_flamingo_view": "Todo",
+	"ago_fun_guppy_shine": "Todo List",
+	"inner_pretty_chipmunk_edit": "Title is required",
+	"away_cute_cuckoo_explore": "Create new TODO",
+	"fine_weary_canary_nudge": "Title",
+	"tense_good_grebe_dial": "Description",
+	"loose_weary_sheep_flow": "Create"
 }

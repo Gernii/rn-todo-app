@@ -1,0 +1,96 @@
+name: Build App Mobile (EAS)
+
+on:
+  push:
+    branches:
+      - main
+      - master
+    paths:
+      - "apps/mobile/**"
+      - ".github/workflows/build-app-mobile.yml"
+      - ".github/workflows/build-app-mobile-eas.yml"
+  workflow_dispatch:
+    inputs:
+      profile:
+        description: "EAS build profile"
+        required: false
+        default: "production"
+        type: choice
+        options:
+          - production
+          - preview
+
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+  BUILD_PROFILE: ${{ inputs.profile || 'production' }}
+
+jobs:
+  build-android:
+    name: Build Android
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup
+        uses: ./.github/actions/setup
+
+      - name: Setup Expo & EAS CLI
+        run: npm install -g eas-cli
+
+      - name: Initialize i18n
+        shell: bash
+        run: npm run i18n.build --filter=mobile
+
+      - name: Build Android (.apk)
+        working-directory: apps/mobile
+        run: |
+          eas build \
+            --platform android \
+            --profile ${{ env.BUILD_PROFILE }} \
+            --non-interactive \
+            --output ./build/android-release.apk
+
+      - name: Upload Android artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-${{ env.BUILD_PROFILE }}-${{ github.sha }}
+          path: apps/mobile/build/android-release.apk
+          retention-days: 7
+
+  build-ios:
+    name: Build iOS
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup
+        uses: ./.github/actions/setup
+
+      - name: Setup Expo & EAS CLI
+        run: npm install -g eas-cli
+
+      - name: Initialize i18n
+        shell: bash
+        run: npm run i18n.build --filter=mobile
+
+      - name: Build iOS (.ipa)
+        working-directory: apps/mobile
+        run: |
+          eas build \
+            --platform ios \
+            --profile ${{ env.BUILD_PROFILE }} \
+            --non-interactive \
+            --output ./build/ios-release.ipa
+
+      - name: Upload iOS artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-${{ env.BUILD_PROFILE }}-${{ github.sha }}
+          path: apps/mobile/build/ios-release.ipa
+          retention-days: 7
