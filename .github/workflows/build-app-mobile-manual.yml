@@ -35,10 +35,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Setup Node
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: 24
           cache: "npm"
@@ -47,7 +47,7 @@ jobs:
         run: npm ci
 
       - name: Setup Java 17
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           java-version: "17"
           distribution: "temurin"
@@ -63,7 +63,7 @@ jobs:
         run: ./gradlew assembleRelease --no-daemon
 
       - name: Upload Android APK
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: android-manual-${{ github.sha }}
           # Gradle output path for a standard RN/Expo project
@@ -78,10 +78,10 @@ jobs:
     runs-on: macos-latest  # NOTE: costs ~10× more GitHub Actions minutes than ubuntu
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Setup Node
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: 24
           cache: "npm"
@@ -123,7 +123,7 @@ jobs:
             archive
 
       - name: Upload iOS archive
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: ios-manual-${{ github.sha }}
           path: apps/mobile/build/app.xcarchive
